@@ -1,0 +1,39 @@
+language: c
+os: linux
+
+env:
+  global:
+    # Set "false" to force rebuild of third-party dependencies.
+    - CACHE_ENABLE=true
+
+jobs:
+  include:
+    - stage: baseline
+      os: linux
+      compiler: gcc
+
+#TODO
+#documentation
+#unit-tests
+#metrics
+#lint
+#cpp.py
+#valgrind
+#clang
+
+#TODO clean those stages:
+#before_install: ci/before_install.sh
+#install:        ci/install.sh
+#before_script:  ci/before_script.sh
+#script:         ci/script.sh
+#before_cache:   ci/before_cache.sh
+
+addons:
+  apt:
+    packages:
+      - cmake
+      - gcc-multilib
+
+script:
+     - cmake -H. -Bbuild
+     - cmake --build build -- -j8
